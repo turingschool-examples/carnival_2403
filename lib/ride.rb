@@ -11,4 +11,7 @@ class Ride
         @rider_log = {}
     end
 
+    def total_revenue
+        total_revenue = 0
+    end
 end
