@@ -64,4 +64,10 @@ RSpec.describe Carnival do
       expect(@carnival1.most_profitable_ride).to eq(@ride3)
     end
   end
+
+  describe 'carnival class variables' do
+    it 'can keep track of all carnivals' do
+      expect(Carnival.all_carnivals).to eq([@carnival1])
+    end
+  end
 end
