@@ -19,7 +19,7 @@ RSpec.describe Visitor do
 
     it 'has spending_money' do
       visitor1 = Visitor.new('Bruce', 54, '$10')
-      expect(visitor1.spending_money).to eq('$10')
+      expect(visitor1.spending_money).to eq(10)
     end
   end
  
