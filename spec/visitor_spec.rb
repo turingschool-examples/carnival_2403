@@ -36,4 +36,14 @@ describe Visitor do
             expect(@visitor_2.tall_enough?(64)).to eq(false)
         end
     end
+
+    describe "#update_spending_money" do
+        it "subtracts the amount from the visitor's spending money" do
+            @visitor.update_spending_money(5)
+            @visitor_2.update_spending_money(3)
+
+            expect(@visitor.spending_money).to eq('$5')
+            expect(@visitor_2.spending_money).to eq('$2')
+        end
+    end
 end
