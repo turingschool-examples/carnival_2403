@@ -14,4 +14,15 @@ describe Ride do
             expect(ride1.excitement).to eq(:gentle)
         end
     end
+
+    describe "boarding" do
+        it "can board a visitor that passes the info" do
+            ride1 = Ride.new({name: "Carousel", min_height: 24, admission: 1, excitement: :gentle})
+            visitor1.add_preference(:gentle)
+            visitor2.add_preference(:gentle)
+            ride1.board_rider(visitor1)
+            ride1.board_rider(visitor2)
+            expect(ride1.rider_log).to eq({visitor1 => 1, visitor2 => 1})
+        end
+    end
 end
