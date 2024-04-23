@@ -11,5 +11,21 @@ RSpec.describe Visitor do
     it "exists" do
       expect(@visitor1).to be_instance_of Visitor
     end
+
+    it "has a name" do
+      expect(@visitor1.name).to eq "Bruce"
+    end
+
+    it "has a height" do
+      expect(@visitor1.height).to eq 54
+    end
+
+    it "has spending money" do
+      expect(@visitor1.spending_money).to eq 10
+    end
+
+    it "has a list of preferences" do
+      expect(@visitor1.preferences).to eq []
+    end
   end
 end
