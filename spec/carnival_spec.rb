@@ -88,5 +88,9 @@ RSpec.describe Carnival do
         end
     end
 
-
+    describe "#most_profitiable_ride" do
+        it "can calculate the most profitiable ride in a given carnival" do
+            expect(@carnival1.most_profitable_ride).to eq(@ride1)
+        end
+    end
 end
