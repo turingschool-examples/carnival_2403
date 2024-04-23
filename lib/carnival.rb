@@ -24,4 +24,13 @@ class Carnival
     popular_ride = ride_and_log.max_by {|ride, number| number}
     popular_ride[0]
   end
+
+  def most_profitable_ride
+    hash = Hash.new
+    @rides.each do |ride|
+      hash[ride] = ride.total_revenue
+    end
+    profitable_ride = hash.max_by {|ride, revenue| revenue}
+    profitable_ride[0]
+  end
 end
