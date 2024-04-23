@@ -30,4 +30,8 @@ class Carnival
             rev 
         end.first
     end
+
+    def total_revenue
+        
+    end
 end
