@@ -18,7 +18,11 @@ RSpec.describe Ride do
       excitement: :thrilling })
 
     @visitor1 = Visitor.new('Bruce', 54, '$10')
+    @visitor1.add_preference(:gentle)
+
     @visitor2 = Visitor.new('Tucker', 36, '$5')
+    @visitor2.add_preference(:gentle)
+    
     @visitor3 = Visitor.new('Penny', 64, '$15')
   end
 
