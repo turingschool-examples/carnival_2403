@@ -16,5 +16,9 @@ RSpec.describe Ride do
       expect(@ride1.admission_fee).to eq(1)
       expect(@ride1.excitement).to eq(:gentle)
     end
+
+    it 'starts with an empty revenues counter' do
+      expect(@ride1.total_revenue).to eq(0)
+    end
   end
 end
