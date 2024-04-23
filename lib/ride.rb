@@ -1,3 +1,4 @@
+require 'pry'
 class Ride
     attr_reader :name, :min_height, :admission, :excitement, :rider_log
 
@@ -16,6 +17,7 @@ class Ride
     end
 
     def can_board?(visitor)
-        visitor.height >= @min_height
+        visitor.height >= @min_height &&
+        visitor.spending_money >= @admission
     end
 end
