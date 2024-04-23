@@ -20,4 +20,14 @@ class Carnival
             count
         end.first
     end
+
+    def most_profitable_ride
+        ride_revenue = Hash.new(0)
+        @rides.each do |ride|
+            ride_revenue[ride] = ride.total_revenue
+        end
+        ride_revenue.max_by do |ride, rev|
+            rev 
+        end.first
+    end
 end
