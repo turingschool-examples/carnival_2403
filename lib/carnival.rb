@@ -24,4 +24,10 @@ class Carnival
       ride.total_revenue / ride.admission_fee
     end
   end
+
+  def most_profitable_ride
+    @rides.max_by do |ride|
+      ride.total_revenue
+    end
+  end
 end
