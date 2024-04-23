@@ -33,4 +33,12 @@ class Carnival
     profitable_ride = hash.max_by {|ride, revenue| revenue}
     profitable_ride[0]
   end
+
+  def total_revenue
+    revenue = 0
+    @rides.each do |ride|
+      revenue += ride.total_revenue
+    end
+    revenue
+  end
 end
