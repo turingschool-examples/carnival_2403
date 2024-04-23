@@ -112,6 +112,7 @@ RSpec.describe Ride do
       }
 
       expect(@ride3.rider_log).to eq expected
+      expect(@ride3.total_revenue).to eq 2
     end
   end
 end
