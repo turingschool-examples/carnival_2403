@@ -1,10 +1,14 @@
 class Carnival
-    attr_accessor :duration, :rides, :total_revenue
+    attr_reader :duration, 
+                :rides,
+                :total_revenue,
+                :visitor_count
 
     def initialize(duration)
         @duration = duration
         @rides = []
         @total_revenue = 0
+        @visitor_count = 0
     end
 
     def add_ride(ride)
@@ -30,4 +34,7 @@ class Carnival
 
         @total_revenue = rides_total
     end
+
+    def generate_carnival_results
+        
 end

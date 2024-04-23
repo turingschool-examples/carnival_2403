@@ -13,7 +13,6 @@ describe Carnival do
         @visitor_3 = Visitor.new('Penny', 64, '$15')
     end
 
-    # use README.md to write test
     describe "#initialize" do
         it "creates a new carnival with a duration, rides, total_revenue" do
             expect(@carnival.duration).to eq(7)
@@ -97,5 +96,74 @@ describe Carnival do
 
             expect(@carnival.calculate_revenue).to eq(10)
         end
+    end
+
+    describe "#carnival_results" do
+        # Visitor count
+        # Revenue earned
+        # List of visitors and each visitor's favorite ride and how much total money a visitor spent
+        # List of rides and who rode each ride and the ride's total revenue
+        it "returns a hash of carnival results" do
+            @visitor.add_preference(:gentle)
+            @visitor_2.add_preference(:gentle)
+            @visitor_3.add_preference(:thrilling)
+            
+            @carnival.add_ride(@ride_1)
+            @carnival.add_ride(@ride_2)
+            @carnival.add_ride(@ride_3)
+
+            @ride_1.board_rider(@visitor)
+            @ride_1.board_rider(@visitor_2)
+            @ride_1.board_rider(@visitor)
+
+            @ride_2.board_rider(@visitor_2)
+
+            @ride_3.board_rider(@visitor_3)
+
+            @carnival.calculate_revenue
+            @carnival.generate_carnival_results
+
+            expect(@carnival.carnival_results).to eq(
+                {
+                visitor_count: 3,
+                revenue: 10,
+                visitors: [
+                    { 
+                        visitor: @visitor,
+                        favorite_ride: @ride_1,
+                        total_money_spent: 3 
+                    },
+                    {
+                        visitor: @visitor_2, 
+                        favorite_ride: @ride_1,
+                        total_money_spent: 5 
+                    },
+                    {
+                        visitor: @visitor_3, 
+                        favorite_ride: @ride_3,
+                        total_money_spent: 2 }
+                ],
+                rides: [
+                    {
+                        ride: @ride_1,
+                        riders: { @visitor => 2, @visitor_2 => 1 },
+                        total_revenue: 3
+                    },
+                    {
+                        ride: @ride_2,
+                        riders: { @visitor_2 => 1 },
+                        total_revenue: 5
+                    },
+                    {
+                        ride: @ride_3,
+                        riders: { @visitor_3 => 1 },
+                        total_revenue: 2
+                    }
+                ]
+                
+            }
+            )
+        end
+        
     end
 end
