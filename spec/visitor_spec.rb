@@ -40,22 +40,18 @@ RSpec.describe Visitor do
             expect(@visitor1.preferences).to eq([:gentle, :thrilling])
         end
     end
-    #  visitor1.preferences
-    # #=> []
+    
+    describe "#tall_enough?" do
+        it "can add determine if visitor is tall enough" do
+            expect(@visitor1.tall_enough?(54)).to be true
 
-    #  visitor1.add_preference(:gentle)
+            expect(@visitor2.tall_enough?(54)).to be false
 
-    #  visitor1.add_preference(:thrilling)
+            expect(@visitor3.tall_enough?(54)).to be true
 
-    #  visitor1.preferences
-    # #=> [:gentle, :thrilling]
-
-    #  visitor2 = Visitor.new('Tucker', 36, '$5')
-    # #=> #<Visitor:0x000000012f1f30f8 @height=36, @name="Tucker", @preferences=[], @spending_money=5>
-
-    #  visitor3 = Visitor.new('Penny', 64, '$15')
-    # #=> #<Visitor:0x000000012f176760 @height=64, @name="Penny", @preferences=[], @spending_money=15>
-
+            expect(@visitor1.tall_enough?(64)).to be false
+        end
+    end
     #  visitor1.tall_enough?(54)
     # #=> true
 
