@@ -61,16 +61,15 @@ RSpec.describe Ride do
   describe "#board_rider" do
     it "subtracts the rides admission fee from the Visitors spending money" do
       @ride1.board_rider(@visitor1)
-      @ride1.board_rider(@visitor2)
       @ride1.board_rider(@visitor1)
+
+      @ride1.board_rider(@visitor2)
 
       expect(@visitor1.spending_money).to eq 8
       expect(@visitor2.spending_money).to eq 4
     end
 
     it "adds the Visitor object to the rider_log Hash as the key, number of times ridden as value" do
-      # expect(@ride1.rider_log).to eq {}
-
       @ride1.board_rider(@visitor1)
       @ride1.board_rider(@visitor2)
       @ride1.board_rider(@visitor1)
@@ -85,10 +84,13 @@ RSpec.describe Ride do
 
     it "adds the revenue to the total_revenue" do
       @ride1.board_rider(@visitor1)
-      @ride1.board_rider(@visitor2)
       @ride1.board_rider(@visitor1)
 
-      expect(@ride1.total_revenue).to eq 3
+      @ride1.board_rider(@visitor2)
+      @ride1.board_rider(@visitor2)
+      @ride1.board_rider(@visitor2)
+
+      expect(@ride1.total_revenue).to eq 5
     end
 
     it "only adds Visitor to rider log if they have are tall enough and have that preference of excitement" do
