@@ -32,6 +32,10 @@ class Carnival
     end
 
     def total_revenue
-        
+        park_rev = 0
+        @rides.each do |ride|
+            park_rev += ride.total_revenue
+        end
+        park_rev
     end
 end
