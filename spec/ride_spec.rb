@@ -50,5 +50,19 @@ RSpec.describe Ride do
 
       expect(@ride1.total_revenue).to eq(3)
     end
+
+    it 'works with multiple rides' do
+      visitor3 = Visitor.new('Penny', 64, '$15')
+      ride2 = Ride.new({ name: 'Ferris Wheel', min_height: 36, admission_fee: 5, excitement: :gentle })
+      ride3 = Ride.new({ name: 'Roller Coaster', min_height: 54, admission_fee: 2, excitement: :thrilling })
+      @visitor2.add_preference(:thrilling)
+      visitor3.add_preference(:thrilling)
+      ride3.board_rider(@visitor1)
+      ride3.board_rider(@visitor2)
+      ride3.board_rider(visitor3)
+
+      expect(visitor3.spending_money).to eq(13)
+      expect(ride3.total_revenue).to eq(2)
+    end
   end
 end
