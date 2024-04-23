@@ -20,6 +20,46 @@ describe Ride do
             expect(@ride_1.admission_fee).to eq(1)
             expect(@ride_1.excitement).to eq(:gentle)
             expect(@ride_1.total_revenue).to eq(0)
+            expect(@ride_1.rider_log).to eq([])
+        end
+    end
+
+    describe "#board_rider" do
+        it "adds a rider to the ride and subtracts ride fee from spending money" do
+            @visitor.add_preference(:gentle)
+            @visitor_2.add_preference(:gentle)
+
+            @ride_1.board_rider(@visitor)
+            @ride_1.board_rider(@visitor_3)
+            @ride_1.board_rider(@visitor)
+
+            expect(@ride_1.rider_log).to eq([@visitor, @visitor_3])
+            expect(@visitor.spending_money).to eq('$6')
+            expect(@visitor_3.spending_money).to eq('$3')
+        end
+    end
+
+    describe "#rider_log" do
+        it "returns a list of riders on the ride" do
+            @visitor.add_preference(:gentle)
+            @visitor_2.add_preference(:gentle)
+
+            @ride_1.board_rider(@visitor)
+            @ride_1.board_rider(@visitor_2)
+
+            expect(@ride_1.rider_log).to eq([@visitor, @visitor_2])
+        end
+    end
+
+    describe "#total_revenue" do
+        it "returns the total revenue of the ride" do
+            @visitor.add_preference(:gentle)
+            @visitor_2.add_preference(:gentle)
+
+            @ride_1.board_rider(@visitor)
+            @ride_1.board_rider(@visitor_2)
+
+            expect(@ride_1.total_revenue).to eq(3)
         end
     end
 end
