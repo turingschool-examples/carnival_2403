@@ -41,4 +41,8 @@ class Carnival
     end
     revenue
   end
+
+  def visitor_count
+    ride_and_log.values.sum
+  end
 end

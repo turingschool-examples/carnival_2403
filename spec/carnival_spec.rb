@@ -129,5 +129,59 @@ RSpec.describe Carnival do
       expect(carnival.total_revenue).to eq(9)
     end
   end
+
+  #IT4
+  describe '#visitor_count' do 
+    it 'returns hash of visitor count, revenue earned, list of visitors and rides' do
+      carnival = Carnival.new(10)
+      ride1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })
+      ride3 = Ride.new({ name: 'Roller Coaster', min_height: 54, admission_fee: 2, excitement: :thrilling })
+      carnival.add_ride(ride1)
+      carnival.add_ride(ride3)
+      visitor1 = Visitor.new('Bruce', 54, '$10')
+      visitor2 = Visitor.new('Tucker', 36, '$5')
+      visitor3 = Visitor.new('Penny', 64, '$15')
+      visitor1.add_preference(:gentle)
+      visitor2.add_preference(:gentle)
+      visitor3.add_preference(:thrilling)
+      ride1.board_rider(visitor1)
+      ride1.board_rider(visitor2)
+      ride3.board_rider(visitor3)
+
+      expect(carnival.visitor_count).to eq(3)
+    end
+
+    #describe '#summary'
+      #it 'returns hash of visitor count, revenue earned, list of visitors and rides' do
+      # expected = {
+      #   visitor_count: integer, 
+      #   revenue_earned: integer, 
+      #   visitors: [
+      #     {
+      #       visitor: Visitor object,
+      #       favorite_ride: Ride object,
+      #       total_money_spent: integer
+      #     }, 
+      #     {
+      #       visitor: Visitor object,
+      #       favorite_ride: Ride object,
+      #       total_money_spent: integer
+      #     }],
+      #   rides: [
+      #     {
+      #       ride: Ride object,
+      #       riders: [Visitor objects],
+      #       total_revenue: integer
+      #     },
+      #     {
+      #       ride: Ride object,
+      #       riders: [Visitor objects],
+      #       total_revenue: integer
+      #     }]
+      #   }
+
+        # expect(carnival.summary).to eq(expected)
+    
+  end
  end
  
