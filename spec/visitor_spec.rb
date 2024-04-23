@@ -13,7 +13,7 @@ RSpec.describe Visitor do
     it 'has attributes' do
       expect(@visitor1.name).to eq('Bruce')
       expect(@visitor1.height).to eq(54)
-      expect(@visitor1.spending_money).to eq('$10')
+      expect(@visitor1.spending_money).to eq(10)
     end
 
     it 'has an empty array of preferences' do
