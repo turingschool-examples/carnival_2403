@@ -27,20 +27,20 @@ RSpec.describe Carnival do
       @carnival1.add_ride(@ride2)
       @carnival1.add_ride(@ride3)
       @visitor1 = Visitor.new('Bruce', 54, '$10')
-      @visitor2 = Visitor.new('Tucker', 36, '$5')
-
-      @ride1.board_rider(@visitor1)
-      @ride1.board_rider(@visitor2)
-      @ride1.board_rider(@visitor1)
-      @ride3.board_rider(@visitor3)
-      @ride3.board_rider(@visitor3)
+      @visitor3 = Visitor.new('Penny', 64, '$15')
+      @visitor3.add_preference(:thrilling)
+      @visitor1.add_preference(:gentle)
     end
 
     it 'can add rides to the rides array' do
-      expect(@carnival1.rides).to eq([ride1, ride2, ride3])
+      expect(@carnival1.rides).to eq([@ride1, @ride2, @ride3])
     end
 
     it 'can calculate total revenue' do
+      @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor1)
+      @ride3.board_rider(@visitor3)
+      @ride3.board_rider(@visitor3)
       expect(@carnival1.total_revenue).to eq(6)
     end
   end
