@@ -71,6 +71,7 @@ class Carnival
             end
         end
         favorite_ride
+        # comeback and fix for situation where visitor rode different rides the same amount of times
     end
 
     def calculate_ride_data

@@ -264,5 +264,35 @@ describe Carnival do
             end
         end
 
+        describe "#find_favorite_ride" do
+            it "returns the visitor's favorite ride" do
+                @visitor.add_preference(:gentle)
+                @visitor_2.add_preference(:gentle)
+                @visitor_3.add_preference(:thrilling)
+
+                @carnival.add_visitor(@visitor)
+                @carnival.add_visitor(@visitor_2)
+                @carnival.add_visitor(@visitor_3)
+                
+                @carnival.add_ride(@ride_1)
+                @carnival.add_ride(@ride_2)
+                @carnival.add_ride(@ride_3)
+
+                @ride_1.board_rider(@visitor)
+                @ride_1.board_rider(@visitor_2)
+                @ride_1.board_rider(@visitor)
+
+                @ride_2.board_rider(@visitor_2)
+
+                @ride_3.board_rider(@visitor_3)
+
+                @carnival.calculate_revenue
+
+                expect(@carnival.find_favorite_ride(@visitor)).to eq(@ride_1)
+                expect(@carnival.find_favorite_ride(@visitor_2)).to eq(@ride_1 || @ride_2) # need logic to fix this situation
+                expect(@carnival.find_favorite_ride(@visitor_3)).to eq(@ride_3)
+            end
+        end
+
     end
 end
