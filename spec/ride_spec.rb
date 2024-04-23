@@ -25,5 +25,6 @@ RSpec.describe Ride do
                     visitor2 => 1}
 
         expect(ride1.rider_log).to eq expected
+        expect(ride1.total_revenue).to eq 3
     end
 end
