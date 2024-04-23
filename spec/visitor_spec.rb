@@ -39,4 +39,16 @@ RSpec.describe Visitor do
       expect(@visitor1.preferences).to eq [:gentle, :thrilling]
     end
   end
+
+  describe "#tall_enough?" do
+    it "returns true if the visitor is tall enough for ride" do
+      expect(@visitor1.tall_enough?(54)).to eq true
+      expect(@visitor3.tall_enough?(54).to eq true
+    end
+
+    it "returns false if the visitor is not tall enough for ride" do
+      expect(@visitor2.tall_enough?(54)).to eq false
+      expect(@visitor1.tall_enough?(64)).to eq false
+    end
+  end
 end
