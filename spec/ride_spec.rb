@@ -1,0 +1,25 @@
+require "./spec/spec_helper"
+
+describe Ride do
+    before(:each) do
+        @ride_1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })
+
+        @ride_2 = Ride.new({ name: 'Ferris Wheel', min_height: 36, admission_fee: 5, excitement: :gentle })
+
+        @ride_3 = Ride.new({ name: 'Roller Coaster', min_height: 54, admission_fee: 2, excitement: :thrilling })
+
+        @visitor = Visitor.new('Bruce', 54, '$10')
+        @visitor_2 = Visitor.new('Tucker', 36, '$5')
+        @visitor_3 = Visitor.new('Penny', 64, '$15')
+    end
+
+    describe "#initialize" do
+        it "creates a new ride with a name, minimum height, admission fee, and excitement level, total_revenue" do
+            expect(@ride_1.name).to eq('Carousel')
+            expect(@ride_1.min_height).to eq(24)
+            expect(@ride_1.admission_fee).to eq(1)
+            expect(@ride_1.excitement).to eq(:gentle)
+            expect(@ride_1.total_revenue).to eq(0)
+        end
+    end
+end
