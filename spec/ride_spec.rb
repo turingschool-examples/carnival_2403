@@ -4,6 +4,7 @@ describe Ride do
     let(:visitor1) {Visitor.new("Bruce", 54, "10")}
     let(:visitor2) {Visitor.new('Tucker', 36, '$5')}
     let(:visitor3) {Visitor.new('Penny', 64, '$15')}
+    let(:visitor4) {Visitor.new('Jenny', 22, '$10')}
 
     describe "initialization" do
         it "can create a new ride with info" do
@@ -23,6 +24,14 @@ describe Ride do
             ride1.board_rider(visitor1)
             ride1.board_rider(visitor2)
             expect(ride1.rider_log).to eq({visitor1 => 1, visitor2 => 1})
+        end
+
+        it "stops someone not tall enough from boarding" do
+            ride1 = Ride.new({name: "Carousel", min_height: 24, admission: 1, excitement: :gentle})
+            ride1.board_rider(visitor2)
+            expect(ride1.rider_log).to eq({visitor2 => 1})
+            ride1.board_rider(visitor4)
+            expect(ride1.rider_log).to eq({visitor2 => 1})
         end
     end
 end

@@ -10,7 +10,12 @@ class Ride
     end
 
     def board_rider(visitor)
+        return unless can_board?(visitor)
         @rider_log[visitor] ||= 0
         @rider_log[visitor] += 1
+    end
+
+    def can_board?(visitor)
+        visitor.height >= @min_height
     end
 end
