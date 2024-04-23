@@ -5,6 +5,12 @@ RSpec.describe Carnival do
     @carnival1 = Carnival.new("Boulder Carnival", 14)
   end
 
+  describe 'carnival class variables' do
+    it 'can keep track of all carnivals' do
+      expect(Carnival.all_carnivals).to eq([@carnival1])
+    end
+  end
+  
   describe 'initialize' do
     it 'can create a carnival object' do
       expect(@carnival1).to be_a(Carnival)
@@ -62,12 +68,6 @@ RSpec.describe Carnival do
       @ride3.board_rider(@visitor3)
 
       expect(@carnival1.most_profitable_ride).to eq(@ride3)
-    end
-  end
-
-  describe 'carnival class variables' do
-    it 'can keep track of all carnivals' do
-      expect(Carnival.all_carnivals).to eq([@carnival1])
     end
   end
 end

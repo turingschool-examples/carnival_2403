@@ -1,4 +1,7 @@
 class Carnival
+
+  @@carnivals = []
+
   attr_reader :name,
               :duration,
               :rides
@@ -7,6 +10,7 @@ class Carnival
     @name = name
     @duration = duration
     @rides = []
+    @@carnivals << self
   end
 
   def add_ride(ride)
@@ -29,5 +33,9 @@ class Carnival
     @rides.max_by do |ride|
       ride.total_revenue
     end
+  end
+
+  def self.all_carnivals
+    @@carnivals
   end
 end
