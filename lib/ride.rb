@@ -16,10 +16,16 @@ class Ride
     end
 
     def board_rider(visitor)
-        if visitor.tall_enough?(@min_height) # && visitor.preferences.include?(@excitement) might need that later
+        if visitor.tall_enough?(@min_height) && visitor.preferences.include?(@excitement)
             visitor.update_spending_money(@admission_fee)
             @rider_log[visitor] += 1
             @total_revenue += @admission_fee
+
+        elsif !visitor.tall_enough?(@min_height)
+            "Sorry, you are not tall enough for this ride."
+
+        else
+            "Sorry, this ride is too cool for you."
         end
     end
 
