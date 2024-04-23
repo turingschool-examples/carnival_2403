@@ -2,7 +2,8 @@ class Visitor
     attr_reader :name, 
                 :height, 
                 :spending_money, 
-                :preferences
+                :preferences,
+                :total_money_spent
 
     def initialize(name, height, spending_money)
         @name = name
@@ -10,7 +11,6 @@ class Visitor
         @spending_money = spending_money
         @preferences = []
         @total_money_spent = 0
-        @favorite_ride = nil
     end
 
     def add_preference(preference)

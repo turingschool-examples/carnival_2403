@@ -23,7 +23,7 @@ class Ride
 
         elsif !visitor.tall_enough?(@min_height)
             "Sorry, you are not tall enough for this ride."
-            
+
         else
             "Sorry, this ride is too cool for you."
         end

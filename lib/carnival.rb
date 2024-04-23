@@ -2,13 +2,15 @@ class Carnival
     attr_reader :duration, 
                 :rides,
                 :total_revenue,
-                :visitors
+                :visitors,
+                :carnival_results
 
     def initialize(duration)
         @duration = duration
         @rides = []
         @total_revenue = 0
         @visitors = []
+        @carnival_results = {}
     end
 
     def add_visitor(visitor)
@@ -40,7 +42,7 @@ class Carnival
     end
 
     def generate_carnival_results
-        results = {
+        @carnival_results = {
             visitor_count: @visitors.length,
             revenue: @total_revenue,
             visitors: calculate_visitor_data,
@@ -49,11 +51,11 @@ class Carnival
     end
 
     def calculate_visitor_data
-        @visitors.map do |object|
+        @visitors.map do |visitor|
             {
-                visitor: object,
-                favorite_ride: find_favorite_ride(object),
-                total_money_spent: object.total_money_spent
+                visitor: visitor,
+                favorite_ride: find_favorite_ride(visitor),
+                total_money_spent: visitor.total_money_spent
             }
         end
     end
@@ -62,10 +64,10 @@ class Carnival
         favorite_ride = nil
         times_ridden = 0
 
-        @rides.rider_log.each do |ride, count|
-            if count > times_ridden
+        @rides.each do |ride|
+            if ride.rider_log[visitor] > times_ridden
                 favorite_ride = ride
-                times_ridden = count
+                times_ridden = ride.rider_log[visitor]
             end
         end
         favorite_ride

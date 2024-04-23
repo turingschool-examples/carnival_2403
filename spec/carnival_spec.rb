@@ -131,12 +131,12 @@ describe Carnival do
                     { 
                         visitor: @visitor,
                         favorite_ride: @ride_1,
-                        total_money_spent: 3 
+                        total_money_spent: 2 
                     },
                     {
                         visitor: @visitor_2, 
-                        favorite_ride: @ride_1,
-                        total_money_spent: 5 
+                        favorite_ride: @ride_1 || @ride_2, # need logic to fix this situation
+                        total_money_spent: 6 
                     },
                     {
                         visitor: @visitor_3, 
@@ -175,5 +175,94 @@ describe Carnival do
 
             expect(@carnival.visitors).to eq([@visitor, @visitor_2, @visitor_3])
         end
+    end
+
+    describe "#calculate_visitor_data" do
+        it "returns an array of visitor data" do
+            @visitor.add_preference(:gentle)
+            @visitor_2.add_preference(:gentle)
+            @visitor_3.add_preference(:thrilling)
+
+            @carnival.add_visitor(@visitor)
+            @carnival.add_visitor(@visitor_2)
+            @carnival.add_visitor(@visitor_3)
+            
+            @carnival.add_ride(@ride_1)
+            @carnival.add_ride(@ride_2)
+            @carnival.add_ride(@ride_3)
+
+            @ride_1.board_rider(@visitor)
+            @ride_1.board_rider(@visitor_2)
+            @ride_1.board_rider(@visitor)
+
+            @ride_2.board_rider(@visitor_2)
+
+            @ride_3.board_rider(@visitor_3)
+
+            @carnival.calculate_revenue
+
+            expect(@carnival.calculate_visitor_data).to eq([
+                {
+                    visitor: @visitor,
+                    favorite_ride: @ride_1,
+                    total_money_spent: 2
+                },
+                {
+                    visitor: @visitor_2,
+                    favorite_ride: @ride_1 || @ride_2,
+                    total_money_spent: 6
+                },
+                {
+                    visitor: @visitor_3,
+                    favorite_ride: @ride_3,
+                    total_money_spent: 2
+                }
+            ])
+        end
+
+        describe "#calculate_ride_data" do
+            it "returns an array of ride data" do
+                @visitor.add_preference(:gentle)
+                @visitor_2.add_preference(:gentle)
+                @visitor_3.add_preference(:thrilling)
+
+                @carnival.add_visitor(@visitor)
+                @carnival.add_visitor(@visitor_2)
+                @carnival.add_visitor(@visitor_3)
+                
+                @carnival.add_ride(@ride_1)
+                @carnival.add_ride(@ride_2)
+                @carnival.add_ride(@ride_3)
+
+                @ride_1.board_rider(@visitor)
+                @ride_1.board_rider(@visitor_2)
+                @ride_1.board_rider(@visitor)
+
+                @ride_2.board_rider(@visitor_2)
+
+                @ride_3.board_rider(@visitor_3)
+
+                @carnival.calculate_revenue
+
+                expect(@carnival.calculate_ride_data).to eq([
+                    {
+                        ride: @ride_1,
+                        riders: { @visitor => 2, @visitor_2 => 1 },
+                        total_revenue: 3
+                    },
+                    {
+                        ride: @ride_2,
+                        riders: { @visitor_2 => 1 },
+                        total_revenue: 5
+                    },
+                    {
+                        ride: @ride_3,
+                        riders: { @visitor_3 => 1 },
+                        total_revenue: 2
+                    }
+                ])
+            end
+        end
+
     end
 end
