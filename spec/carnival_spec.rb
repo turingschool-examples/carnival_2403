@@ -5,7 +5,17 @@ RSpec.describe Carnival do
     @carnival = Carnival.new(14)
   end
 
-  it "exists" do
-    expect(@carnival).to be_instance_of Carnival
+  describe "#initialize" do
+    it "exists" do
+      expect(@carnival).to be_instance_of Carnival
+    end
+
+    it "has a duration" do
+      expect(@carnival.duration).to eq 14
+    end
+
+    it "has a list of rides" do
+      expect(@carnival.rides).to eq []
+    end
   end
 end
