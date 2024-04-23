@@ -42,5 +42,21 @@ RSpec.describe Ride do
     expect(@ride1.total_revenue).to eq 3
   end
 
+  it "can board multiple rides and riders if they are tall enough and have the preference" do
+    #should refactor into 2 tests later
+    visitor3 = Visitor.new('Penny', 64, '$15')
+    ride2 = Ride.new({ name: 'Ferris Wheel', min_height: 36, admission_fee: 5, excitement: :gentle })
+    ride3 = Ride.new({ name: 'Roller Coaster', min_height: 54, admission_fee: 2, excitement: :thrilling })
+    @visitor2.add_preference(:thrilling)
+    visitor3.add_preference(:thrilling)
+    ride3.board_rider(@visitor1)
+    ride3.board_rider(@visitor2)
+    ride3.board_rider(visitor3)
 
+    expect(@visitor1.spending_money).to eq 10
+    expect(@visitor2.spending_money).to eq 5
+    expect(visitor3.spending_money).to eq 13
+    expect(ride3.rider_log).to eq ({visitor3 => 1})
+    expect(ride3.total_revenue).to eq 2
+  end
 end
