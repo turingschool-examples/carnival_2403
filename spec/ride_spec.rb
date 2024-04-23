@@ -29,5 +29,12 @@ RSpec.describe Ride do
         it "can initialize wtih history of riders" do
             expect(@ride1.rider_log).to eq({})
         end
+        
+    end
+    
+    describe "#total_revenue" do
+        it "can return total_revenue" do
+            expect(@ride1.total_revenue).to eq (0)
+        end
     end
 end
