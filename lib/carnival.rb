@@ -24,4 +24,13 @@ class Carnival
         sorted_rides.first[0]
     end
 
+    def most_profitable_ride
+        ride_profits = {}
+        @rides.each do |ride|
+            ride_profits[ride] = ride.total_revenue
+        end
+        sorted_profits = ride_profits.sort_by {|k, v| -v}
+        sorted_profits.first[0]
+    end
+
 end
