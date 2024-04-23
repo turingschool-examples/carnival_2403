@@ -12,9 +12,16 @@ class Carnival
 
   def most_popular_ride
     @rides.find do |ride|
-      ride.rider_log.max_by { |visitor, count| count}.first
+      ride.rider_log.max_by { |visitor, count| count }.first
     end
   end
+
+  # def most_profitable_ride
+  #   # count of times ridden * @admission_fee
+  #   @rides.find do |ride|
+  #     ride.rider_log.max_by { |visitor, count| ride.admission_fee * count}.first
+  #   end
+  # end
 
   def total_revenue
     @rides.sum do |ride|
