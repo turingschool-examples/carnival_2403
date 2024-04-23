@@ -22,7 +22,7 @@ RSpec.describe Ride do
 
     @visitor2 = Visitor.new('Tucker', 36, '$5')
     @visitor2.add_preference(:gentle)
-    
+
     @visitor3 = Visitor.new('Penny', 64, '$15')
   end
 
@@ -49,6 +49,42 @@ RSpec.describe Ride do
 
     it "can track total revenue" do
       expect(@ride1.total_revenue).to eq 0
+    end
+
+    it "has a rider log" do
+      expect(@ride1.rider_log).to eq {}
+    end
+  end
+
+  describe "#board_rider" do
+    it "subtracts the rides admission fee from the Visitors spending money" do
+      @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor2)
+      @ride1.board_rider(@visitor1)
+
+      expect(@visitor1.spending_money).to eq 8
+      expect(@visitor2.spending_money).to eq 4
+    end
+
+    it "adds the Visitor object to the rider_log Hash as the key, number of times ridden as value" do
+      expect(@ride1.rider_log).to eq {}
+
+      @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor2)
+      @ride1.board_rider(@visitor1)
+
+      expected = {
+        @visitor1 => 2,
+        @visitor2 => 1
+      }
+    end
+
+    it "adds the revenue to the total_revenue" do
+      @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor2)
+      @ride1.board_rider(@visitor1)
+
+      expect(@ride1.total_revenue).to eq 3
     end
   end
 end
