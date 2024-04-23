@@ -114,5 +114,22 @@ RSpec.describe Ride do
       expect(@ride3.rider_log).to eq expected
       expect(@ride3.total_revenue).to eq 2
     end
+
+    it "does not board Visitor if they do not have the spending money" do
+      @visitor2.add_preference(:gentle)
+
+      expect(@visitor2.spending_money).to eq 5
+      expect(@visitor2.preferences).to eq [:gentle]
+
+      @ride2.board_rider(@visitor2)
+
+      expect(@ride2.rider_log).to eq { @visitor2 => 1 }
+
+      expect(@visitor2.spending_money).to eq 0
+
+      @ride2.board_rider(@visitor2)
+
+      expect(@ride2.rider_log).to eq { @visitor2 => 1 }
+    end
   end
 end
