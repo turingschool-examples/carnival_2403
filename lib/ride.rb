@@ -16,7 +16,6 @@ class Ride
     end
 
     def board_rider(visitor)
-        # add visitor to rider log
         @rider_log[visitor] = @rider_log[visitor] += 1
         # require 'pry'; binding.pry
     end
