@@ -28,4 +28,10 @@ RSpec.describe Visitor do
     expect(visitor3.tall_enough?(54)).to eq true
     expect(visitor1.tall_enough?(64)).to eq false
   end
+
+  it 'can pay admission fee' do
+    visitor1 = Visitor.new('Bruce', 54, '$10')
+
+    expect(visitor1.pay_admission(1)).to eq 9
+  end
 end
