@@ -12,12 +12,15 @@ class Ride
     @admission_fee = ride_attributes[:admission_fee]
     @excitement = ride_attributes[:excitement]
     @total_revenue = 0
-    @rider_log = {}
+    @rider_log = Hash.new(0)
   end
 
   def board_rider(rider)
-    if rider.spending_money > @admission_fee
-
+    if rider.spending_money > @admission_fee && rider.tall_enough(@min_height) && rider.preferences.include?(@excitement)
+      
+      rider.spending_money -= @admission_fee
+      @total_revenue += @admission_fee
+      @rider_log[rider] += 1 
     end
   end
 end

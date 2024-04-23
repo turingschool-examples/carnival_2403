@@ -34,11 +34,13 @@ RSpec.describe Ride do
     it 'can board riders onto the ride and generates a rider log' do
       @ride1.board_rider(@visitor1)
       @ride1.board_rider(@visitor2)
+      @ride1.board_rider(@visitor1)
       expected = ({
-
+        @visitor1 => 2,
+        @visitor2 => 1
       })
 
-      expect(@ride_1.rider_log).to eq(expected)
+      expect(@ride1.rider_log).to eq(expected)
     end
   end
 end
