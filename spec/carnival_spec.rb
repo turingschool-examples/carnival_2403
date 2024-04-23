@@ -99,14 +99,14 @@ describe Carnival do
     end
 
     describe "#carnival_results" do
-        # Visitor count
-        # Revenue earned
-        # List of visitors and each visitor's favorite ride and how much total money a visitor spent
-        # List of rides and who rode each ride and the ride's total revenue
         it "returns a hash of carnival results" do
             @visitor.add_preference(:gentle)
             @visitor_2.add_preference(:gentle)
             @visitor_3.add_preference(:thrilling)
+
+            @carnival.add_visitor(@visitor)
+            @carnival.add_visitor(@visitor_2)
+            @carnival.add_visitor(@visitor_3)
             
             @carnival.add_ride(@ride_1)
             @carnival.add_ride(@ride_2)
@@ -165,5 +165,15 @@ describe Carnival do
             )
         end
         
+    end
+
+    describe "#add_visitor" do
+        it "adds a visitor to the carnival" do
+            @carnival.add_visitor(@visitor)
+            @carnival.add_visitor(@visitor_2)
+            @carnival.add_visitor(@visitor_3)
+
+            expect(@carnival.visitors).to eq([@visitor, @visitor_2, @visitor_3])
+        end
     end
 end

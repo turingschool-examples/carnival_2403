@@ -9,6 +9,8 @@ class Visitor
         @height = height
         @spending_money = spending_money
         @preferences = []
+        @total_money_spent = 0
+        @favorite_ride = nil
     end
 
     def add_preference(preference)
@@ -22,6 +24,7 @@ class Visitor
     def update_spending_money(amount)
         current_money = @spending_money.delete('$').to_i
         current_money -= amount
+        @total_money_spent += amount
         @spending_money = "$#{current_money}"
     end
 end
