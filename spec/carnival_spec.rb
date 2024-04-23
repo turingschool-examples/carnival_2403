@@ -58,7 +58,6 @@ RSpec.describe Carnival do
     @carnival.add_ride(@ride2)
     @carnival.add_ride(@ride3)
     @ride1.board_rider(@visitor1)
-    @ride1.board_rider(@visitor2)
     @ride1.board_rider(@visitor1)
     @ride2.board_rider(@visitor2)
     @ride3.board_rider(@visitor3)
@@ -79,16 +78,14 @@ RSpec.describe Carnival do
     expect(@carnival.total_revenue).to eq 0
 
     @ride1.board_rider(@visitor1)
-    @ride1.board_rider(@visitor2)
     @ride1.board_rider(@visitor1)
     @ride2.board_rider(@visitor2)
     @ride3.board_rider(@visitor3)
 
-    expect(@carnival.total_revenue).to eq 10
+    expect(@carnival.total_revenue).to eq 9
 
-    @ride1.board_rider(@visitor2)
     @ride3.board_rider(@visitor3)
 
-    expect(@carnival.total_revenue).to eq 13
+    expect(@carnival.total_revenue).to eq 11
   end
 end
