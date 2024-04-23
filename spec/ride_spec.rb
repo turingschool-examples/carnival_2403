@@ -50,5 +50,16 @@ RSpec.describe Ride do
             expect(@visitor1.spending_money).to eq(9)
             expect(@visitor2.spending_money).to eq(4)
         end
+
+        it "won't board rider if any condition is not met" do
+            @visitor4 = Visitor.new('James', 72, '$1')
+            @visitor4.add_preference(:thrilling)
+            @ride3.board_rider(@visitor2) #visitor not tall enough
+            @ride3.board_rider(@visitor1) #ride not in visitor preferences
+            @ride3.board_rider(@visitor4) #visitor doesn't have enough money
+
+            expect(@ride3.rider_log).to eq({})
+        end
+
     end
 end
