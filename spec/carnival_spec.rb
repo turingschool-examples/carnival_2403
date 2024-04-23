@@ -56,9 +56,10 @@ RSpec.describe Carnival do
       @carnival.add_ride(@ride2)
       @carnival.add_ride(@ride3)
 
+      @visitor1.add_preference(:gentle)
+
       @ride1.board_rider(@visitor1)
-      @ride1.board_rider(@visitor2)
-      @ride1.board_rider(@visitor3)
+      @ride1.board_rider(@visitor1)
 
       @ride2.board_rider(@visitor1)
 
