@@ -17,7 +17,12 @@ class Ride
 
     def board_rider(visitor)
         @rider_log[visitor] = @rider_log[visitor] += 1
+        # @total_revenue = visitor.spending_money - @admission_fee
         # require 'pry'; binding.pry
     end
+
+    # def add_revenue
+    #     @total_revenue << @admission_fee
+    # end
 
 end
