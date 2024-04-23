@@ -8,9 +8,11 @@ RSpec.describe Carnival do
   describe 'carnival class variables' do
     it 'can keep track of all carnivals' do
       expect(Carnival.all_carnivals).to eq([@carnival1])
+      carnival2 = Carnival.new("Colorado Carnival", 21)
+      expect(Carnival.all_carnivals).to eq([@carnival1, carnival2])
     end
   end
-  
+
   describe 'initialize' do
     it 'can create a carnival object' do
       expect(@carnival1).to be_a(Carnival)
