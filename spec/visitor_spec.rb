@@ -51,4 +51,14 @@ RSpec.describe Visitor do
       expect(@visitor1.tall_enough?(64)).to eq false
     end
   end
+
+  describe "#pay_for_ride" do
+    it "subtracts given number from spending money" do
+      expect(@visitor1.spending_money).to eq 10
+
+      @visitor1.pay_for_ride(2)
+
+      expect(@visitor1.spending_money).to eq 8
+    end
+  end
 end
