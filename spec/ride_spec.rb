@@ -22,8 +22,10 @@ RSpec.describe Ride do
 
     @visitor2 = Visitor.new('Tucker', 36, '$5')
     @visitor2.add_preference(:gentle)
+    @visitor2.add_preference(:thrilling)
 
     @visitor3 = Visitor.new('Penny', 64, '$15')
+    @visitor3.add_preference(:thrilling)
   end
 
   describe "#initialize" do
@@ -87,6 +89,29 @@ RSpec.describe Ride do
       @ride1.board_rider(@visitor1)
 
       expect(@ride1.total_revenue).to eq 3
+    end
+
+    it "only adds Visitor to rider log if they have are tall enough and have that preference of excitement" do
+      @ride3.board_rider(@visitor1)
+      @ride3.board_rider(@visitor2)
+      @ride3.board_rider(@visitor3)
+
+      expect(@ride3.min_height).to eq 54
+
+      expect(@visitor1.height).to eq 54
+      expect(@visitor1.preferences).to eq [:gentle]
+
+      expect(@visitor2.height).to eq 36
+      expect(@visitor2.preferences).to eq [:gentle, :thrilling]
+
+      expect(@visitor3.height).to eq 64
+      expect(@visitor3.preferences).to eq [:thrilling]
+
+      expected = {
+        @visitor3 => 1
+      }
+
+      expect(@ride3.rider_log).to eq expected
     end
   end
 end
