@@ -53,10 +53,12 @@ RSpec.describe Visitor do
   end
 
   describe "#pay_for_ride" do
-    expect(@visitor1.spending_money).to eq 10
+    it "subtracts given number from spending money" do
+      expect(@visitor1.spending_money).to eq 10
 
-    @visitor1.pay_for_ride(2)
+      @visitor1.pay_for_ride(2)
 
-    expect(@visitor1.spending_money).to eq 8
+      expect(@visitor1.spending_money).to eq 8
+    end
   end
 end

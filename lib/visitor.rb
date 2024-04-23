@@ -18,4 +18,8 @@ class Visitor
   def tall_enough?(ride_height)
     @height >= ride_height
   end
+
+  def pay_for_ride(ride_cost)
+    @spending_money -= ride_cost
+  end
 end
