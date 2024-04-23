@@ -15,4 +15,13 @@ class Visitor
   def add_preference(preference)
     @preferences << preference
   end
+
+  def tall_enough?(min_height)
+    # binding.pry
+    if @height >= min_height
+      true
+    else
+      false
+    end
+  end
 end
