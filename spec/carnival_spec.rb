@@ -76,11 +76,9 @@ RSpec.describe Carnival do
   describe 'summary' do
     it 'can provide a summary of the carnival' do
       @ride1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })
-      @ride2 = Ride.new({ name: 'Ferris Wheel', min_height: 36, admission_fee: 5, excitement: :gentle })
       @ride3 = Ride.new({ name: 'Roller Coaster', min_height: 54, admission_fee: 2, excitement: :thrilling })
 
       @carnival1.add_ride(@ride1)
-      @carnival1.add_ride(@ride2)
       @carnival1.add_ride(@ride3)
       @visitor1 = Visitor.new('Bruce', 54, '$10')
       @visitor3 = Visitor.new('Penny', 64, '$15')
@@ -95,7 +93,7 @@ RSpec.describe Carnival do
       expected = ({
         visitor_count: 2,
         revenue_earned: 6,
-        visitors: 
+        visitors: [
           {
             visitor: @visitor1,
             favorite_ride: @ride1,
@@ -105,17 +103,17 @@ RSpec.describe Carnival do
             visitor: @visitor3,
             favorite_ride: @ride3,
             total_money_spent: 4
-          }
+          }],
         rides: [
           {
             ride: @ride1,
-            riders: [@visitor1]
-            total_revenue: 3
+            riders: [@visitor1],
+            revenue: 3
           },
           {
             ride: @ride3,
-            riders: [@visitor3]
-            total_revenue: 4
+            riders: [@visitor3],
+            revenue: 4
           }]
       })
 
