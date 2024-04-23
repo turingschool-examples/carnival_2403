@@ -17,7 +17,7 @@ RSpec.describe Carnival do
     end
   end
 
-  describe 'rides' do
+  describe 'carnival methods' do
     before do
       @ride1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })
       @ride2 = Ride.new({ name: 'Ferris Wheel', min_height: 36, admission_fee: 5, excitement: :gentle })
@@ -42,6 +42,16 @@ RSpec.describe Carnival do
       @ride3.board_rider(@visitor3)
       @ride3.board_rider(@visitor3)
       expect(@carnival1.total_revenue).to eq(6)
+    end
+
+    it 'can calculate the most popular ride' do
+      @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor1)
+      @ride3.board_rider(@visitor3)
+      @ride3.board_rider(@visitor3)
+      
+      expect(@carnival1.most_popular_ride).to eq(@ride1)
     end
   end
 end
