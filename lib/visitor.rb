@@ -1,11 +1,10 @@
 class Visitor
+  
   attr_reader :name, 
               :height, 
               :preferences, 
               :spending_money
-              
-  attr_accessor :spending_money
-
+          
   def initialize(name, height, spending_money)
     @name = name 
     @height = height
@@ -19,5 +18,9 @@ class Visitor
 
   def tall_enough(required_height)
     height >= required_height
+  end
+
+  def spend_money(amount)
+    @spending_money -= amount
   end
 end
