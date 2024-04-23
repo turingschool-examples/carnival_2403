@@ -42,5 +42,13 @@ RSpec.describe Ride do
 
       expect(@ride1.rider_log).to eq(expected)
     end
+
+    it 'can generate revenue from riders' do
+      @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor2)
+      @ride1.board_rider(@visitor1)
+
+      expect(@ride1.total_revenue).to eq(3)
+    end
   end
 end
