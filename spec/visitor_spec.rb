@@ -52,14 +52,4 @@ RSpec.describe Visitor do
             expect(@visitor1.tall_enough?(64)).to be false
         end
     end
-    #  visitor1.tall_enough?(54)
-    # #=> true
-
-    #  visitor2.tall_enough?(54)
-    # #=> false
-
-    #  visitor3.tall_enough?(54)
-    # #=> true
-
-    #  visitor1.tall_enough?(64)
 end
