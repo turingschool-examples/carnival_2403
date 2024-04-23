@@ -29,4 +29,16 @@ RSpec.describe Visitor do
       expect(@visitor1.preferences).to eq([:gentle, :thrilling])
     end
   end
+
+  describe 'height check' do
+    it 'can check to see if a visitor is tall enough for a ride' do
+      visitor2 = Visitor.new('Tucker', 36, '$5')
+      visitor3 = Visitor.new('Penny', 64, '$15')
+
+      expect(@visitor1.tall_enough(54)).to be(true)
+      expect(visitor2.tall_enough(54)).to be(false)
+      expect(visitor3.tall_enough(54)).to be(true)
+      expect(@visitor1.tall_enough(64)).to be(false)
+    end
+  end
 end
