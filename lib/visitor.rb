@@ -23,4 +23,9 @@ class Visitor
       false
     end
   end
+
+  def update_spending_money(admission_fee)
+    @spending_money = spending_money - admission_fee
+    
+  end
 end
