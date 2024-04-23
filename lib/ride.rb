@@ -6,6 +6,7 @@ class Ride
                 :excitement,
                 :total_revenue,
                 :rider_log
+    attr_accessor :name, :rider_log
 
     def initialize(ride_details)
         @name = ride_details[:name]

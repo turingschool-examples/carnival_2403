@@ -36,6 +36,10 @@ RSpec.describe Carnival do
         visitor3.add_preference(:thrilling)
         visitor3.add_preference(:gentle)
 
+        carnival_A.add_ride(ride1)
+        carnival_A.add_ride(ride2)
+        carnival_A.add_ride(ride3)
+
         ride1.board_rider(visitor1)
         ride1.board_rider(visitor2)
         ride1.board_rider(visitor1)
