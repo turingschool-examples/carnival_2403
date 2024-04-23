@@ -57,15 +57,37 @@ RSpec.describe Carnival do
       @carnival.add_ride(@ride3)
 
       @visitor1.add_preference(:gentle)
+      @visitor3.add_preference(:thrilling)
 
       @ride1.board_rider(@visitor1)
       @ride1.board_rider(@visitor1)
+      @ride1.board_rider(@visitor1)
 
-      @ride2.board_rider(@visitor1)
+      @ride3.board_rider(@visitor3)
 
       expect(@carnival.most_popular_ride).to eq @ride1
     end
   end
+
+  # describe "#most_profitable_ride" do
+  #   it "returns the Ride object that has earned the most" do
+  #     @carnival.add_ride(@ride1)
+  #     @carnival.add_ride(@ride2)
+  #     @carnival.add_ride(@ride3)
+
+  #     @visitor1.add_preference(:gentle)
+  #     @visitor2.add_preference(:gentle)
+
+  #     @ride1.board_rider(@visitor1)
+  #     @ride1.board_rider(@visitor1)
+  #     @ride1.board_rider(@visitor1)
+  #     @ride1.board_rider(@visitor1)
+
+  #     @ride2.board_rider(@visitor2)
+
+  #     expect(@carnival.most_profitable_ride).to eq @ride2
+  #   end
+  # end
 
   describe "#total_revenue" do
     it "calculates the total revenue earned from all rides" do
