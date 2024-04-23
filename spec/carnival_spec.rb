@@ -67,4 +67,19 @@ RSpec.describe Carnival do
             expect(@carnival1.most_profitable_ride).to eq(@ride2)
         end
     end
+
+    describe "#total_revenue" do
+        it "can return total revenue of all rides" do
+            @carnival1.add_ride(@ride1)
+            @carnival1.add_ride(@ride2)
+            @carnival1.add_ride(@ride3)
+
+            @ride1.board_rider(@visitor1)
+            @ride1.board_rider(@visitor1)
+            @ride2.board_rider(@visitor2)
+            @ride3.board_rider(@visitor3)
+
+            expect(@carnival1.total_revenue).to eq(9)
+        end
+    end
 end

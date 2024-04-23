@@ -33,4 +33,11 @@ class Carnival
         sorted_profits.first[0]
     end
 
+    def total_revenue
+        revenues = @rides.map do |ride|
+            ride.total_revenue
+        end
+        revenues.sum
+    end
+
 end
