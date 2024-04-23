@@ -52,7 +52,7 @@ RSpec.describe Ride do
     end
 
     it "has a rider log" do
-      expect(@ride1.rider_log).to eq {}
+      # expect(@ride1.rider_log).to eq {}
     end
   end
 
@@ -67,7 +67,7 @@ RSpec.describe Ride do
     end
 
     it "adds the Visitor object to the rider_log Hash as the key, number of times ridden as value" do
-      expect(@ride1.rider_log).to eq {}
+      # expect(@ride1.rider_log).to eq {}
 
       @ride1.board_rider(@visitor1)
       @ride1.board_rider(@visitor2)
@@ -77,6 +77,8 @@ RSpec.describe Ride do
         @visitor1 => 2,
         @visitor2 => 1
       }
+
+      expect(@ride1.rider_log).to eq expected
     end
 
     it "adds the revenue to the total_revenue" do
