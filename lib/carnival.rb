@@ -11,9 +11,20 @@ class Carnival
   end
 
   def most_popular_ride
-    # require 'pry'; binding.pry
-    @rides.max_by do |ride|
-      ride.rider_log.values
+    ride_count = Hash.new
+    @rides.each do |ride|
+      count = ride.rider_log.sum {|k, v| v}
+      ride_count[ride] = count
     end
+    highest_ridden = ride_count.max_by {|k, v| v}
+    highest_ridden[0]
+  end
+
+  def most_profitable_ride
+    @rides.max_by {|ride| ride.total_revenue}
+  end
+
+  def total_revenue
+    @rides.sum {|ride| ride.total_revenue}
   end
 end

@@ -18,7 +18,6 @@ class Ride
   def board_rider(visitor)
     if visitor.tall_enough?(@min_height) && visitor.preferences.include?(@excitement)
     @rider_log[visitor] += 1
-    # require 'pry'; binding.pry
     visitor.pay_admission(@admission_fee)
     @total_revenue += @admission_fee
     end
