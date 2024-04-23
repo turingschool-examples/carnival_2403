@@ -16,13 +16,25 @@ class Ride
     end
 
     def board_rider(visitor)
-        @rider_log[visitor] = @rider_log[visitor] += 1
-        # @total_revenue = visitor.spending_money - @admission_fee
+        if can_they_ride?(visitor) == true && visitor.tall_enough?(min_height) == true
+            @rider_log[visitor] = @rider_log[visitor] += 1
+            add_revenue
+            spend_money(visitor)
+        end
         # require 'pry'; binding.pry
     end
 
-    # def add_revenue
-    #     @total_revenue << @admission_fee
-    # end
+    def spend_money(visitor)
+        adjusted_spending_money = visitor.spending_money -= @admission_fee
+        adjusted_spending_money
+    end
+
+    def add_revenue
+        @total_revenue += @admission_fee
+    end
+
+    def can_they_ride?(visitor)
+        visitor.preferences.include?(@excitement)
+    end
 
 end
