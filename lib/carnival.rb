@@ -15,4 +15,10 @@ class Carnival
       ride.rider_log.max_by { |visitor, count| count}.first
     end
   end
+
+  def total_revenue
+    @rides.sum do |ride|
+      ride.total_revenue
+    end
+  end
 end
