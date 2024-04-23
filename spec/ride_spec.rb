@@ -30,9 +30,9 @@ describe Ride do
         it "stops someone not tall enough from boarding" do
             ride1 = Ride.new({name: "Carousel", min_height: 24, admission: 1, excitement: :gentle})
             ride1.board_rider(visitor2)
-            expect(ride1.rider_log).to eq({visitor2 => 1})
+            expect(ride1.rider_log).to eq({})
             ride1.board_rider(visitor4)
-            expect(ride1.rider_log).to eq({visitor2 => 1})
+            expect(ride1.rider_log).to eq({})
         end
         
         it "stops someone who can't afford boarding" do
@@ -43,7 +43,28 @@ describe Ride do
         end
 
         it "stops someone who doesn't have the preferences" do
-            
+            ride1 = Ride.new({name: "Carousel", min_height: 24, admission: 1, excitement: :thrilling})
+            visitor1.add_preference(:gentle)
+            ride1.board_rider(visitor1)
+            expect(ride1.rider_log).to eq({})
+            expect(visitor1.spending_money).to eq(10)
+        end
+
+        it "takes money from the visitor" do
+            ride1 = Ride.new({name: "Carousel", min_height: 24, admission: 1, excitement: :gentle})
+            ride1.board_rider(visitor1)
+            expect(visitor1.spending_money).to eq(9)
+        end
+    end
+
+    describe "total_revenue" do
+        it "calculates total revenue" do
+            ride1 = Ride.new({name: "Carousel", min_height: 24, admission: 1, excitement: :gentle})
+            expect(ride1.total_revenue).to eq(0)
+            ride1.board_rider(visitor1)
+            ride1.board_rider(visitor2)
+            ride1.board_rider(visitor3)
+            expect(ride1.total_revenue).to eq(3)
         end
     end
 end

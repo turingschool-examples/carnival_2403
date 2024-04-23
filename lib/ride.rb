@@ -14,10 +14,16 @@ class Ride
         return unless can_board?(visitor)
         @rider_log[visitor] ||= 0
         @rider_log[visitor] += 1
+        visitor.take_money(@admission)
     end
 
     def can_board?(visitor)
         visitor.height >= @min_height &&
-        visitor.spending_money >= @admission
+        visitor.spending_money >= @admission &&
+        visitor.preferences.include?(@excitement)
+    end
+
+    def total_revenue
+        @rider_log.values.sum * @admission
     end
 end
