@@ -38,27 +38,36 @@ RSpec.describe Visitor do
     end
   end
 
-  describe '#boad_rider' do
-    it 'can board riders based on attributes and update rider log' do
+
+  describe '#rider_admitted(visitor)' do
+    it 'can check attributes to admit a rider' do
       ride1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })      
-      visitor1 = Visitor.new('Bruce', 4, '$10')
+      visitor1 = Visitor.new('Bruce', 54, '$10')
+      visitor2 = Visitor.new('Tucker', 6, '$5')
+      visitor3 = Visitor.new('Chris', 56, '$0')
+      visitor4 = Visitor.new('Molly', 36, '$30')
+      visitor1.add_preference(:gentle)
+      visitor1.add_preference(:thrilling)
+
+      expect(ride1.rider_admitted?(visitor1)).to be true
+      expect(ride1.rider_admitted?(visitor2)).to be false
+      expect(ride1.rider_admitted?(visitor3)).to be false
+      expect(ride1.rider_admitted?(visitor4)).to be false
+    end
+  end
+
+  describe '#boad_rider' do
+    xit 'can board riders based on attributes and update rider log' do
+      ride1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })      
+      visitor1 = Visitor.new('Bruce', 54, '$10')
       visitor2 = Visitor.new('Tucker', 36, '$5')
       visitor1.add_preference(:gentle)
       visitor2.add_preference(:gentle)
-      # ride1.board_rider(visitor1)
-      # ride1.board_rider(visitor2)
-      # ride1.board_rider(visitor1)
+      ride1.board_rider(visitor1)
+      ride1.board_rider(visitor2)
+      ride1.board_rider(visitor1)
 
-      expect(ride1.rider_admitted?(visitor1)).to be true
-      expect(ride1.rider_admitted?(visitor2)).to be true
-
-      #expect(ride1.rider_log).to eq({visitor1 => 2, visitor2 => 1})
-      #helper for rider admitted?
-        #visitor.tall_enough? true &&
-        #visitor.preferences.include? ride[:excitement]
-        #visitor.spending_money > @admission_fee
-      #helper for update_visitor_spending_money
-        #visitor.spending_money - ride[:admission_fee]
+      expect(ride1.rider_log).to eq({visitor1 => 2, visitor2 => 1})
     end
   end
 end

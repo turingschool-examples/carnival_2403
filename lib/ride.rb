@@ -17,10 +17,12 @@ class Ride
   end
 
   def rider_admitted?(visitor)
-    binding.pry
-    visitor.tall_enough?(@min_height)
+    visitor.tall_enough?(@min_height) &&
+    visitor.preferences.include?(@excitement) &&
+    visitor.spending_money >= @admission_fee
   end
-  # def board_rider(visitor)
+  
+  def board_rider(visitor)
 
-  # end
+  end
 end

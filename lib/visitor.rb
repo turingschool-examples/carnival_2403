@@ -17,7 +17,6 @@ class Visitor
   end
 
   def tall_enough?(min_height)
-    # binding.pry
     if @height >= min_height
       true
     else
