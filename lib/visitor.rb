@@ -18,4 +18,10 @@ class Visitor
     def tall_enough?(height_min)
         @height >= height_min
     end
+
+    def update_spending_money(amount)
+        current_money = @spending_money.delete('$').to_i
+        current_money -= amount
+        @spending_money = "$#{current_money}"
+    end
 end

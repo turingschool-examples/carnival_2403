@@ -20,7 +20,7 @@ describe Ride do
             expect(@ride_1.admission_fee).to eq(1)
             expect(@ride_1.excitement).to eq(:gentle)
             expect(@ride_1.total_revenue).to eq(0)
-            expect(@ride_1.rider_log).to eq([])
+            expect(@ride_1.rider_log).to eq({})
         end
     end
 
@@ -30,24 +30,25 @@ describe Ride do
             @visitor_2.add_preference(:gentle)
 
             @ride_1.board_rider(@visitor)
-            @ride_1.board_rider(@visitor_3)
+            @ride_1.board_rider(@visitor_2)
             @ride_1.board_rider(@visitor)
 
-            expect(@ride_1.rider_log).to eq([@visitor, @visitor_3])
-            expect(@visitor.spending_money).to eq('$6')
-            expect(@visitor_3.spending_money).to eq('$3')
+            expect(@ride_1.rider_log).to eq({ @visitor => 2, @visitor_2 => 1 })
+            expect(@visitor.spending_money).to eq('$8')
+            expect(@visitor_2.spending_money).to eq('$4')
         end
     end
 
     describe "#rider_log" do
-        it "returns a list of riders on the ride" do
+        it "returns a hash of riders on the ride with amount of time they ride it" do
             @visitor.add_preference(:gentle)
             @visitor_2.add_preference(:gentle)
 
             @ride_1.board_rider(@visitor)
             @ride_1.board_rider(@visitor_2)
+            @ride_1.board_rider(@visitor)
 
-            expect(@ride_1.rider_log).to eq([@visitor, @visitor_2])
+            expect(@ride_1.rider_log).to eq({ @visitor => 2, @visitor_2 => 1 })
         end
     end
 
@@ -59,7 +60,7 @@ describe Ride do
             @ride_1.board_rider(@visitor)
             @ride_1.board_rider(@visitor_2)
 
-            expect(@ride_1.total_revenue).to eq(3)
+            expect(@ride_1.total_revenue).to eq(2)
         end
     end
 end
