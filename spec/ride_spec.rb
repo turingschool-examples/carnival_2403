@@ -11,6 +11,7 @@ describe Ride do
         @visitor = Visitor.new('Bruce', 54, '$10')
         @visitor_2 = Visitor.new('Tucker', 36, '$5')
         @visitor_3 = Visitor.new('Penny', 64, '$15')
+        @very_small_man = Visitor.new('Tiny Tim', 5, '$1')
     end
 
     describe "#initialize" do
@@ -36,6 +37,26 @@ describe Ride do
             expect(@ride_1.rider_log).to eq({ @visitor => 2, @visitor_2 => 1 })
             expect(@visitor.spending_money).to eq('$8')
             expect(@visitor_2.spending_money).to eq('$4')
+        end
+
+        it "does not add a rider to the ride if they are not tall enough" do
+            @very_small_man.add_preference(:gentle)
+
+            @ride_1.board_rider(@very_small_man)
+
+            expect(@ride_1.rider_log).to eq({})
+            expect(@very_small_man.spending_money).to eq('$1')
+            expect(@ride_1.board_rider(@very_small_man)).to eq("Sorry, you are not tall enough for this ride.")
+        end
+
+        it "does not add a rider to the ride if they do not have the correct preference" do
+            @visitor.add_preference(:thrilling)
+
+            @ride_1.board_rider(@visitor)
+
+            expect(@ride_1.rider_log).to eq({})
+            expect(@visitor.spending_money).to eq('$10')
+            expect(@ride_1.board_rider(@visitor)).to eq("Sorry, this ride is too cool for you.")
         end
     end
 
