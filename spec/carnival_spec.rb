@@ -2,17 +2,17 @@ require "./spec/spec_helper"
 
 RSpec.describe Carnival do
     it 'exists' do
-        carnival1 = Carnival.new(14)
+        carnival1 = Carnival.new('14 days')
         expect(carnival1).to be_a Carnival
     end
 
     it 'has no rides to start' do
-        carnival1 = Carnival.new(14)
+        carnival1 = Carnival.new('14 days')
         expect(carnival1.rides).to eq([])
     end
 
     it 'can add rides' do
-        carnival1 = Carnival.new(14)
+        carnival1 = Carnival.new('14 days')
         ride1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })
         
         expect(carnival1.rides).to eq([])
@@ -23,7 +23,7 @@ RSpec.describe Carnival do
     end    
 
     it 'can check most profitable ride' do
-        carnival1 = Carnival.new(14)
+        carnival1 = Carnival.new('14 days')
         ride1 = Ride.new({ name: 'Carousel', min_height: 24, admission_fee: 1, excitement: :gentle })
         ride2 = Ride.new({ name: 'Ferris Wheel', min_height: 36, admission_fee: 5, excitement: :gentle })
         visitor1 = Visitor.new('Bruce', 54, '$20') 

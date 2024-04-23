@@ -3,7 +3,7 @@ class Carnival
                 :rides
 
     def initialize(duration)
-        @duration = duration
+        @duration = duration.delete(' days').to_i
         @rides = []
     end
 
