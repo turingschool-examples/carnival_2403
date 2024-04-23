@@ -21,6 +21,10 @@ class Carnival
 
         all_revenue
     end
+
+    def most_profitable_ride
+        most_profitable_ride = @rides.max_by(&:total_revenue)
+    end
 end
 
 
