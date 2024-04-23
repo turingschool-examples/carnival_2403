@@ -21,7 +21,6 @@ class Ride
             add_revenue
             spend_money(visitor)
         end
-        # require 'pry'; binding.pry
     end
 
     def spend_money(visitor)
