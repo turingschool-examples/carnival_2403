@@ -38,4 +38,18 @@ class Carnival
         end
         park_rev
     end
+
+    def visitor_count
+        visitors = []
+        @rides.each do |ride|
+
+            ride.rider_log.each do | visitor, log|
+                visitors << visitor
+            end
+            #check that the visitor wasn't counted already
+            #if he wasn't counted increase count by one
+        end
+
+        visitors.uniq.count
+    end
 end
